@@ -1,0 +1,2 @@
+validacionde usuario,el emil no puede estar repetido al hacer un put, encriptaciónn de password,roles de usuario, entornos de desarrollo,abm de usuario
+mlab,mongodb atlas, heroku, 

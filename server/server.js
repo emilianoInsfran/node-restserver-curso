@@ -9,7 +9,9 @@ app.use(bodyParser.urlencoded({ extended: false }))
  
 // parse application/json
 app.use(bodyParser.json())//esto por ejemplo es un midelware que son funciones que se van a ejecutar cada ves que pase por ahí el codigo
-app.use( require('./routes/usuario'));
+
+//congif global de rutas
+app.use( require('./routes/index'));
 
 mongoose.set('useFindAndModify', false);
 

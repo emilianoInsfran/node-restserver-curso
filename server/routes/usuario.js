@@ -1,17 +1,23 @@
 const express = require('express');
 const _ = require('underscore');//el estandar de uso es un _
 const app = express();
-const Usuario = require('../models/usuario')
+
+const Usuario = require('../models/usuario');
+const  { verificaToken,verificAdmin_Role }  = require('../middlewares/autenticacion');
+
 const bcrypt = require('bcrypt');
 
 
 app.get('/', function (req, res) {
     res.json('Hello World');
 });
+//los middleware se colocan como segundo argumento app.get('usuario',middleware)=> ej verificaToken
+app.get('/usuario',verificaToken, (req, res) => {
 
-app.get('/usuario',function(req,res){
-
-
+    return res.json({
+        usuario: req.usuario,
+        nombre:req.usuario.nombre
+    });
 
    let desde = req.query.desde || 0; //si viene desde busca a partir de ahí sino desde el inicio
    desde = Number(desde); //para poner en postman parametros opcionales seria ej /usuario?desde=10
@@ -40,7 +46,7 @@ app.get('/usuario',function(req,res){
             });
 });
 
-app.post('/usuario',function(req,res){
+app.post('/usuario',[verificaToken,verificAdmin_Role],function(req,res){
     let body = req.body;
 
     let usuario = new Usuario({
@@ -81,7 +87,7 @@ app.post('/usuario',function(req,res){
 
 });
 
-app.put('/usuario/:id',function(req,res){
+app.put('/usuario/:id',[verificaToken,verificAdmin_Role],function(req,res){
     let id = req.params.id;
     let body = _.pick(req.body,['nombre','email','img','role','estado']);
     //el pick es una de las tantas funcionalidades para ver que se puede actualizar  y que no
@@ -109,7 +115,7 @@ app.put('/usuario/:id',function(req,res){
 
 });
 
-app.delete('/usuario/:id',function(req,res){
+app.delete('/usuario/:id',[verificaToken,verificAdmin_Role],function(req,res){
     //res.json('get usuario');
     let id = req.params.id;
     //let body = _.pick(req.body,['estado']);

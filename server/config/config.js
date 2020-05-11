@@ -1,12 +1,38 @@
+//============================
 //Puerto
+//============================
+
 process.env.PORT = process.env.PORT || 3000;
 
-
-//entorno
+//============================
+//Entorno
+//============================
 
 process.env.NODE_ENV = process.env.NODE_ENV   || 'dev';
 //localhost:27017/cafe
 //mongodb://<dbuser>:<dbpassword>@ds119091.mlab.com:19091/cafe
+
+
+//============================
+//Vencimiento del token
+//============================
+//60 segundos
+//60 miuntos
+//24 horas
+//30 dias
+process.env.CADUCIDAD_TOKEN =  60 * 60 * 24 * 30; 
+
+//============================
+//Seed de autenticaón (seed=semilla)
+//============================
+
+process.env.SEED =  process.env.SEED || 'este-es-el-seed-del-desarrollo';
+
+//para que no se vea desde github o cualquier repo podemos crear una variable de entorno
+//en HEROKU con el comando
+
+//heroku config =>para listar;
+//heroku config:set SEED="este-es-el-seed-del-produccion"=>setear una nueva variable de entorno (el SEED='este-es-el-seed-del-producción' es un ejemplo)
 
 let urlDB ;
 
