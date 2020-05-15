@@ -43,3 +43,11 @@ if(process.env.NODE_ENV == 'dev'){
 }
 
 process.env.URLDB = urlDB
+
+
+
+//============================
+//google client id - https://console.developers.google.com/apis/credentials?authuser=0&organizationId=0&project=sign-in-dev-277109
+//============================
+
+process.env.CLIENT_ID = process.env.CLIENT_ID || '613974415251-9jvsfign0hajn33hdah2qu1haj8t9mr9.apps.googleusercontent.com';
