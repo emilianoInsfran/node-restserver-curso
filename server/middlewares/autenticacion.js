@@ -44,6 +44,28 @@ let verificAdmin_Role = (req,res,next)=>{
 
 }
 
+//==========
+//Verificar token  para imagen
+//==========
+
+
+let verificaTokenImg = (req,res, next)=>{
+    let token = req.query.token;
+
+    jwt.verify( token, process.env.SEED,(err, decoded)=>{//verifica si el token (o autorization depende como lo ayas nombrado) es valido
+        if (err){
+            return res.status(401).json({
+                ok:false,
+                err: {
+                    message:'token no válido'
+                }
+            });//no autorizado es el 401
+        }
+
+        req.usuario = decoded.data;//la info del usuario si el token es valido
+        next();
+    })
+}
 module.exports = {
-    verificaToken,verificAdmin_Role
+    verificaToken,verificAdmin_Role,verificaTokenImg
 }
