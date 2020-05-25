@@ -14,10 +14,10 @@ app.get('/', function (req, res) {
 //los middleware se colocan como segundo argumento app.get('usuario',middleware)=> ej verificaToken
 app.get('/usuario',verificaToken, (req, res) => {
 
-    return res.json({
+    /*return res.json({
         usuario: req.usuario,
         nombre:req.usuario.nombre
-    });
+    });*/
 
    let desde = req.query.desde || 0; //si viene desde busca a partir de ahí sino desde el inicio
    desde = Number(desde); //para poner en postman parametros opcionales seria ej /usuario?desde=10
